@@ -1,0 +1,45 @@
+<h1 class="page-header">{{title}}</h1>
+<!--一旦MESSAGE有值的时候才显示MESSAGE ng-if='message'-->
+<h2 ng-if="message">{{message}}</h2>
+<div class="list-group">
+
+  <a href="#" class="list-group-item" ng-repeat="item in subjects">
+    <span class="badge">{{item.rating.average}}</span>
+    <div class="media">
+      <div class="media-left">
+      <img class="media-object" ng-src="{{item.images.small}}" alt="{{item.title}}">
+
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading" style="font-weight: bold">{{item.title}}</h3>
+        <p>
+          导演:
+          <span ng-repeat="d in item.directors">
+            {{d.name+($last?'':'、')}}
+              <!--<span ng-if="!$last">、</span>-->
+        </span>
+
+        </p>
+        <p>类型: {{item.genres.join('、')}}</p>
+      </div>
+    </div>
+  </a>
+
+</div>
+<div ng-show="!loading">
+	<p >总共:{{totalCount}}条{{totalPages}}页</p>
+	<nav>
+		<ul class="pager">
+			<li class="previous" ng-class="{disabled:currentPage<=1}"><a ng-click="go(currentPage-1)">上一页</a>></li>
+			<li class="next" ng-class="{disabled:currentPage>=totalPages}"><a  ng-click="go(currentPage+1)">下一页</a></li>
+		</ul>
+	</nav>
+</div>
+
+<div class="mask" ng-show="loading">
+	<div class="spinner">
+		<div class="dot1"></div>
+		<div class="dot2"></div>
+	</div>
+</div>
+
